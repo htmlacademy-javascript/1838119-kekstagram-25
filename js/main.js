@@ -10,9 +10,9 @@ function checkStringLength (str, stringLength ) {
   if (str.length <= stringLength) {
     return true;
   }
-    return false;
+  return false;
 }
 
-console.log(checkStringLength('hello world', 12));
+checkStringLength('hello world', 12);
 
-console.log(getRandomIntInclusive(10,50));
+getRandomIntInclusive(10,50);
