@@ -13,9 +13,7 @@ function checkStringLength (str, stringLength ) {
   return false;
 }
 
-const getRandomArrayElement = (elements) => {
-  return elements[getRandomIntInclusive(0, elements.length - 1)];
-}
+const getRandomArrayElement = (elements) => elements[getRandomIntInclusive(0, elements.length - 1)];
 
 const ID = [
   1,
@@ -43,7 +41,7 @@ const ID = [
   23,
   24,
   25
-]
+];
 
 const URL = [
   'photos/1.jpg',
@@ -71,7 +69,7 @@ const URL = [
   'photos/23.jpg',
   'photos/24.jpg',
   'photos/25.jpg',
-]
+];
 
 const  DESCRIPTION = [
   'Отдыхаю',
@@ -83,7 +81,7 @@ const  DESCRIPTION = [
   'Лучший день!',
   'Когда жизнь удалась',
   'Заберите меня с работы',
-]
+];
 
 const AVATAR = [
   'img/avatar-1.svg',
@@ -92,12 +90,12 @@ const AVATAR = [
   'img/avatar-4.svg',
   'img/avatar-5.svg',
   'img/avatar-6.svg',
-]
+];
 
 const MESSAGE = [
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
   'Всё отлично!',
-]
+];
 
 const NAME = [
   'Артём',
@@ -105,7 +103,7 @@ const NAME = [
   'Тимофей',
   'Иван',
   'Анжела',
-]
+];
 
 const COMMENTS = [
 
@@ -123,18 +121,17 @@ const COMMENTS = [
     name: getRandomArrayElement(NAME),
   },
 
-]
+];
 
-const createInstaPost = () => {
-  return {
-    id: getRandomArrayElement(ID),
-    url: getRandomArrayElement(URL),
-    description: getRandomArrayElement(DESCRIPTION),
-    likes: getRandomIntInclusive(15, 200),
-    comments: COMMENTS[0],
-  }
-}
+const createInstaPost = () => ({
+  id: getRandomArrayElement(ID),
+  url: getRandomArrayElement(URL),
+  description: getRandomArrayElement(DESCRIPTION),
+  likes: getRandomIntInclusive(15, 200),
+  comments: COMMENTS[0],
+});
 
-const similarInstaPost = Array.from({length: 25}, createInstaPost);
+const similarInstaPost = () => Array.from({length: 25}, createInstaPost);
 
-console.log(similarInstaPost);
+checkStringLength('hello', 10);
+similarInstaPost();
