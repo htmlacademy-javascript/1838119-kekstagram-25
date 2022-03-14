@@ -1,6 +1,5 @@
-
-
 import './util.js';
-import {similarInstaPost} from './data.js';
+import {createInstaPosts} from './data.js';
+import './makepicture.js';
 
-similarInstaPost();
+createInstaPosts();
