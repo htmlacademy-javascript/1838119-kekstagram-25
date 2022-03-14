@@ -116,6 +116,6 @@ const createInstaPost = () => ({
   comments: COMMENTS[0],
 });
 
-const similarInstaPost = () => Array.from({length: 25}, createInstaPost);
+const createInstaPosts = () => Array.from({length: 25}, createInstaPost);
 
-export {similarInstaPost};
+export {createInstaPosts};
