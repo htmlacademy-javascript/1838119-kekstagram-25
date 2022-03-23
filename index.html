@@ -15,7 +15,7 @@
     <!-- Фильтрация изображений от других пользователей -->
     <section class="img-filters  img-filters--inactive  container">
       <h2 class="img-filters__title  visually-hidden">Фильтр фотографий</h2>
-      <form class="img-filters__form" action="index.html" method="get" autocomplete="off">
+      <form class="img-filters__form" action="https://25.javascript.pages.academy/kekstagram" method="get" autocomplete="off">
         <button type=button class="img-filters__button  img-filters__button--active" id="filter-default">По умолчанию</button>
         <button type=button class="img-filters__button" id="filter-random">Случайные</button>
         <button type=button class="img-filters__button" id="filter-discussed">Обсуждаемые</button>
@@ -115,7 +115,7 @@
 
                 <!-- Добавление хэш-тегов и комментария к изображению -->
                 <fieldset class="img-upload__text text">
-                  <input type="text" class="text__hashtags text__input" name="hashtags" placeholder="#ХэшТег" value="#ХэшТег" minlength="2" maxlength="20">
+                  <input type="text" class="text__hashtags text__input" name="hashtags" placeholder="#ХэшТег" value="#ХэшТег" minlength="2" maxlength="100">
                   <textarea class="text__description text__input" name="description" placeholder="Ваш комментарий..."></textarea>
                 </fieldset>
 
