@@ -8,6 +8,7 @@ const closeEditWindowButton = document.querySelector('#upload-cancel');
 const hashtagInput = document.querySelector('.text__hashtags');
 const commentsInput = document.querySelector('.text__description');
 
+
 const openEditPictureWindow = () => {
   modalWindow.classList.add('modal-open');
   editPictureWindow.classList.remove('hidden');
@@ -25,18 +26,21 @@ uploadPictureInput.addEventListener ('change', () => {
 closeEditWindowButton.addEventListener ('click', (evt) => {
   evt.preventDefault();
   closeEditPictureWindow();
-  uploadPictureInput.innerHTML = '';
+  uploadPictureInput.value = '';
+  console.log(uploadPictureInput.value);
 });
 
 document.addEventListener ('keydown', (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
     closeEditPictureWindow();
-    uploadPictureInput.innerHTML = '';
+    uploadPictureInput.value = '';
+    console.log(uploadPictureInput.value);
   }
 });
 
 hashtagInput.addEventListener('keydown', (evt) => {
+  evt.stopPropagation();
   if(isEscapeKey(evt)) {
     evt.preventDefault();
     closeEditWindowButton.disabled=true;
@@ -44,6 +48,7 @@ hashtagInput.addEventListener('keydown', (evt) => {
 });
 
 commentsInput.addEventListener('keydown', (evt) => {
+  evt.stopPropagation();
   if(isEscapeKey(evt)) {
     evt.preventDefault();
     closeEditWindowButton.disabled=true;
