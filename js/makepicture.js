@@ -17,5 +17,4 @@ createNewPosts.forEach( ({url, likes, comments}) => {
 
 pictureBlock.appendChild(userPictureFragment);
 
-export {createNewPosts};
-
+export {createNewPosts, pictureBlock, userPictureTemplate};

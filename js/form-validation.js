@@ -2,6 +2,7 @@
 const form = document.querySelector('.img-upload__form');
 const hashtagInput = document.querySelector('.text__hashtags');
 const commentsInput = document.querySelector('.text__description');
+const hashTagsValidText = document.querySelector('.text__error-hashtag');
 
 console.log(hashtagInput);
 console.log(commentsInput );
@@ -22,6 +23,7 @@ const validateHashtag = (value) => {
 
   for (let i = 0; i < severalHashtags.length; i++) {
     if (re.test(severalHashtags[i])=== false) {
+      hashTagsValidText.textContent = 'Хэштег должен начинаться с #, от 2 до 19 символов, максимально можно ввести 5 хэштегов'
       return false
     }
   };
@@ -31,10 +33,9 @@ const validateHashtag = (value) => {
    if (hashtagsSet.size !== severalHashtags.length) {
     return false;
    };
+   hashTagsValidText.textContent = '';
    return true;
 };
-
-
 
 const validateComments = (value) => value.length <= 140;
 

@@ -115,8 +115,15 @@
 
                 <!-- Добавление хэш-тегов и комментария к изображению -->
                 <fieldset class="img-upload__text text">
+                  <label class="text__el text__el--hashtags">
                   <input type="text" class="text__hashtags text__input" name="hashtags" placeholder="#ХэшТег" value="#ХэшТег" minlength="2" maxlength="100">
-                  <textarea class="text__description text__input" name="description" placeholder="Ваш комментарий..."></textarea>
+                  <div class="pristine-error text__error text__error-hashtag"></div>
+                  </label>
+
+                  <label class="text__el text__el--description">
+                  <textarea class="text__description text__input" name="description" placeholder="Ваш комментарий..." minlength="2" maxlength="140"
+                  data-pristine-minlength-message="Минимальная длина 2 символа" data-pristine-maxlength-message="Максимальная длина 140 символов"></textarea>
+                  </label>
                 </fieldset>
 
                 <span class="validation-message"> </span>
@@ -128,7 +135,6 @@
           </form>
         </div>
       </section>
-
       <!-- Здесь будут изображения других пользователей -->
 
     </section>
@@ -140,7 +146,7 @@
 
         <!-- Просмотр изображения -->
         <div class="big-picture__img">
-          <img src="img/logo-background-3.jpg" alt="Девушка в купальнике" width="600" height="600">
+          <img class="big-picture__big-img" src="img/logo-background-3.jpg" alt="Девушка в купальнике" width="600" height="600">
         </div>
 
         <!-- Информация об изображении. Подпись, комментарии, количество лайков -->

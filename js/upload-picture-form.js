@@ -43,7 +43,7 @@ hashtagInput.addEventListener('keydown', (evt) => {
   evt.stopPropagation();
   if(isEscapeKey(evt)) {
     evt.preventDefault();
-    closeEditWindowButton.disabled=true;
+    //closeEditWindowButton.disabled=true;
   }
 });
 
@@ -51,7 +51,7 @@ commentsInput.addEventListener('keydown', (evt) => {
   evt.stopPropagation();
   if(isEscapeKey(evt)) {
     evt.preventDefault();
-    closeEditWindowButton.disabled=true;
+    //closeEditWindowButton.disabled=true;
   }
 });
 
