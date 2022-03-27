@@ -13,4 +13,6 @@ function checkStringLength (str, stringLength ) {
 
 const getRandomArrayElement = (elements) => elements[getRandomIntInclusive(0, elements.length - 1)];
 
-export {checkStringLength, getRandomArrayElement, getRandomIntInclusive};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {checkStringLength, getRandomArrayElement, getRandomIntInclusive, isEscapeKey};
