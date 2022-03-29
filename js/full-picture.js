@@ -1,17 +1,14 @@
 // Реализовать сценарий просмотра фотографий в полноразмерном режиме
-import {createInstaPosts} from './data.js';
-
-const pictureSmallSize = document.querySelectorAll('.picture__img')
+const pictureSmallSize = document.querySelectorAll('.picture');
 const viewFullSizePictureWindow = document.querySelector('.big-picture');
 
-const openpictureFullSize = createInstaPosts();
-
-openpictureFullSize.forEach( ({url, likes, COMMENTS}) => {
-  console.log(pictureSmallSize);
-  pictureSmallSize.addEventListener ('click', () => {
+for (let i = 0; i < pictureSmallSize.length; i++) {
+  pictureSmallSize[i].addEventListener('click', function(){
     viewFullSizePictureWindow.classList.remove('hidden');
-    viewFullSizePictureWindow.querySelector('.big-picture__big-img').src = url;
-    viewFullSizePictureWindow.querySelector('.likes-count').textContent = likes;
-    viewFullSizePictureWindow.querySelector('.comments-count').textContent = COMMENTS.length;
+    const openPictureFullSize = function () {
+       document.querySelector('.big-picture__big-img').src = pictureSmallSize[i].src;
+       document.querySelector('.likes-count').textContent = pictureSmallSize[i].textContent;
+};
   });
-});
+};
+

@@ -522,6 +522,18 @@ main {
   max-height: 600px;
 }
 
+.img-upload__preview-img--25 {
+  transform: scale(0.25);
+}
+
+.img-upload__preview-img--50 {
+  transform: scale(0.5);
+}
+
+.img-upload__preview-img--75 {
+  transform: scale(0.75);
+}
+
 
 /**
  * Шкала регулирования глубины фильтра
