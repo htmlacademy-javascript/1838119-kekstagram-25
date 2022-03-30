@@ -4,6 +4,8 @@ const smallerButton = document.querySelector('.scale__control--smaller');
 const changeInput = document.querySelector('.scale__control--value');
 const uploadedImage = document.querySelector('.img-upload__preview-img');
 
+let currentSize = 100;
+
 
 // При изменении значения поля .scale__control--value изображению внутри .img-upload__preview
 //должен добавляться соответствующий стиль CSS, который с помощью трансформации scale задаёт масштаб.
@@ -24,7 +26,7 @@ noUiSlider.create(sliderElement, {
   format: {
     to: function (value) {
       if (Number.isInteger(value)) {
-        return value.toFixed(0) + ' %';
+        return `${value.toFixed(0)  } %`;
       }
     },
     from: function (value) {
@@ -33,53 +35,94 @@ noUiSlider.create(sliderElement, {
   },
 });
 
-sliderElement.noUiSlider.on('update', (...rest)=>{
-  changeInput.value = sliderElement.noUiSlider.get();
-});
+// sliderElement.noUiSlider.on('update', (...rest)=>{
+//   changeInput.value = sliderElement.noUiSlider.get();
+// });
 
 function manualStep (direction) {
-  let currentPosition = parseInt(sliderElement.noUiSlider.get());
-  let stepSize = 25;
+  const currentPosition = parseInt(sliderElement.noUiSlider.get());
+  const stepSize = 25;
 
   if(direction == 'f') {
-    currentPosition += stepSize;
+    currentSize += stepSize;
   }
 
   if(direction == 'b') {
-    currentPosition -= stepSize;
+    currentSize -= stepSize;
   }
 
-  currentPosition = (Math.round(currentPosition / stepSize) * stepSize);
-  sliderElement.noUiSlider.set(currentPosition);
-};
+  console.log(currentSize);
 
-biggerButton.addEventListener ('click', function(){
+  // currentPosition = (Math.round(currentPosition / stepSize) * stepSize);
+  // sliderElement.noUiSlider.set(currentPosition);
+  changeInput.value = currentSize;
+}
+
+biggerButton.addEventListener ('click', ()=> {
   manualStep('f');
-});
-
-smallerButton.addEventListener ('click', function(){
-  manualStep('b');
-});
-
-changeInput.addEventListener('change', function() {
   if (changeInput.value === 25) {
-    console.log(25);
     uploadedImage.classList.add('img-upload__preview-img--25');
-  };
+  }
 
   //Не понимаю, что делаю не так. Консоль лог даже не срабатывает
 
-  // if (sliderElement.noUiSlider.get(50)) {
-  //   uploadedImage.classList.remove('img-upload__preview-img--25');
-  //   uploadedImage.classList.add('img-upload__preview-img--50');
-  // };
+  if (currentSize >= 50) {
+    uploadedImage.classList.remove('img-upload__preview-img--25');
+    uploadedImage.classList.add('img-upload__preview-img--50');
+  }
 
-  // if (sliderElement.noUiSlider.get(75)) {
-  //   uploadedImage.classList.add('img-upload__preview-img--50');
-  //   uploadedImage.classList.add('img-upload__preview-img--75');
-  // };
+  if (currentSize>= 75) {
+    uploadedImage.classList.add('img-upload__preview-img--50');
+    uploadedImage.classList.add('img-upload__preview-img--75');
+  }
 
-  // if (sliderElement.noUiSlider.get(100)) {
-  //   uploadedImage.classList.remove('img-upload__preview-img--75');
-  // };
+  if (currentSize >= 100) {
+    uploadedImage.classList.remove('img-upload__preview-img--75');
+  }
 });
+
+smallerButton.addEventListener ('click', ()=> {
+  manualStep('b');
+  if (changeInput.value === 25) {
+    uploadedImage.classList.add('img-upload__preview-img--25');
+  }
+
+  //Не понимаю, что делаю не так. Консоль лог даже не срабатывает
+
+  if (currentSize >= 50) {
+    uploadedImage.classList.remove('img-upload__preview-img--25');
+    uploadedImage.classList.add('img-upload__preview-img--50');
+  }
+
+  if (currentSize>= 75) {
+    uploadedImage.classList.add('img-upload__preview-img--50');
+    uploadedImage.classList.add('img-upload__preview-img--75');
+  }
+
+  if (currentSize >= 100) {
+    uploadedImage.classList.remove('img-upload__preview-img--75');
+  }
+});
+
+// changeInput.addEventListener('change', function() {
+//   console.log(25);
+//   if (changeInput.value === 25) {
+//     uploadedImage.classList.add('img-upload__preview-img--25');
+//   };
+
+//   //Не понимаю, что делаю не так. Консоль лог даже не срабатывает
+
+//   if (currentSize >= 50) {
+//     uploadedImage.classList.remove('img-upload__preview-img--25');
+//     uploadedImage.classList.add('img-upload__preview-img--50');
+//   };
+
+//   if (currentSize>= 75) {
+//     uploadedImage.classList.add('img-upload__preview-img--50');
+//     uploadedImage.classList.add('img-upload__preview-img--75');
+//   };
+
+//   if (currentSize >= 100) {
+//     uploadedImage.classList.remove('img-upload__preview-img--75');
+//   };
+// });
