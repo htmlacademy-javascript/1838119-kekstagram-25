@@ -27,7 +27,6 @@ closeEditWindowButton.addEventListener ('click', (evt) => {
   evt.preventDefault();
   closeEditPictureWindow();
   uploadPictureInput.value = '';
-  console.log(uploadPictureInput.value);
 });
 
 document.addEventListener ('keydown', (evt) => {
@@ -35,7 +34,6 @@ document.addEventListener ('keydown', (evt) => {
     evt.preventDefault();
     closeEditPictureWindow();
     uploadPictureInput.value = '';
-    console.log(uploadPictureInput.value);
   }
 });
 

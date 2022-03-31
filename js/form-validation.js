@@ -4,10 +4,6 @@ const hashtagInput = document.querySelector('.text__hashtags');
 const commentsInput = document.querySelector('.text__description');
 const hashTagsValidText = document.querySelector('.text__error-hashtag');
 
-console.log(hashtagInput);
-console.log(commentsInput );
-console.log(form);
-
 const pristine = new Pristine(form, {
   classTo: 'text__el--description',
   errorTextParent: 'text__el--description',
@@ -18,23 +14,23 @@ const validateHashtag = (value) => {
   const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
   const severalHashtags = value.split(' ');
   if (severalHashtags.length <= 5 === false) {
-    return false
-  };
+    return false;
+  }
 
   for (let i = 0; i < severalHashtags.length; i++) {
     if (re.test(severalHashtags[i])=== false) {
-      hashTagsValidText.textContent = 'Хэштег должен начинаться с #, от 2 до 19 символов, максимально можно ввести 5 хэштегов'
-      return false
+      hashTagsValidText.textContent = 'Хэштег должен начинаться с #, от 2 до 19 символов, максимально можно ввести 5 хэштегов';
+      return false;
     }
-  };
+  }
 
   //проверка на уникальность хэштегов
   const hashtagsSet = new Set(severalHashtags);
-   if (hashtagsSet.size !== severalHashtags.length) {
+  if (hashtagsSet.size !== severalHashtags.length) {
     return false;
-   };
-   hashTagsValidText.textContent = '';
-   return true;
+  }
+  hashTagsValidText.textContent = '';
+  return true;
 };
 
 const validateComments = (value) => value.length <= 140;
@@ -48,11 +44,11 @@ form.addEventListener('submit', (evt) => {
   pristine.validate();
 });
 
-hashtagInput.addEventListener('change', function(evt) {
+hashtagInput.addEventListener('change', () => {
   pristine.validate();
 });
 
-commentsInput.addEventListener('change', function(evt) {
+commentsInput.addEventListener('change', () => {
   pristine.validate();
 });
 
