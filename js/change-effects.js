@@ -7,7 +7,7 @@ const uploadedImage = document.querySelector('.img-upload__preview-img');
 const changeEffects = () => {
   effects.forEach((effect)=> {
     effect.addEventListener('click', ()=> {
-      effects.forEach((effect)=> {
+      effects.forEach(()=> {
         uploadedImage.classList.remove(`effects__preview--${effect.value}`);
       });
     });
@@ -47,8 +47,6 @@ noUiSlider.create(sliderElement, {
 sliderElement.noUiSlider.on('update',() => {
   const newValue = sliderElement.noUiSlider.get();
   valueElement.value = newValue;
-  console.log(currentEffect);
-  console.log(valueElement.value);
 
   const filterMap = {
     chrome: 'grayscale',
@@ -57,6 +55,11 @@ sliderElement.noUiSlider.on('update',() => {
     phobos: 'blur',
     heat: 'brightness',
   };
+
+  if (currentEffect === 'marvin') {
+    uploadedImage.style.filter = `${filterMap[currentEffect]}(${newValue}%)`;
+    return;
+  }
 
   uploadedImage.style.filter = `${filterMap[currentEffect]}(${newValue})`;
 });
@@ -118,19 +121,17 @@ effects.forEach ((effect) => {
           min: 0,
           max: 100,
         },
-        start: 50,
+        start: 100,
         step: 1,
         format: {
           to: function (value) {
-            console.log(value);
             if (Number.isInteger(value)) {
-              return `${value.toFixed(0)  }%`;
+              return value.toFixed(0);
             }
           },
           from: function (value) {
-            return `${parseFloat(value)  }%`;
+            return parseFloat(value);
           },
-          //почему-то в консоли что-то странное выводится
         },
       });
     }
@@ -146,9 +147,8 @@ effects.forEach ((effect) => {
         step: 0.1,
         format: {
           to: function (value) {
-            console.log(value);
             if (Number.isInteger(value)) {
-              return `${value.toFixed(0)  }px`;
+              return `${value.toFixed(0) }px`;
             }
             return `${value.toFixed(1) }px`;
           },

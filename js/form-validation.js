@@ -4,10 +4,6 @@ const hashtagInput = document.querySelector('.text__hashtags');
 const commentsInput = document.querySelector('.text__description');
 const hashTagsValidText = document.querySelector('.text__error-hashtag');
 
-console.log(hashtagInput);
-console.log(commentsInput );
-console.log(form);
-
 const pristine = new Pristine(form, {
   classTo: 'text__el--description',
   errorTextParent: 'text__el--description',
@@ -48,11 +44,11 @@ form.addEventListener('submit', (evt) => {
   pristine.validate();
 });
 
-hashtagInput.addEventListener('change', (evt) => {
+hashtagInput.addEventListener('change', () => {
   pristine.validate();
 });
 
-commentsInput.addEventListener('change', (evt) => {
+commentsInput.addEventListener('change', () => {
   pristine.validate();
 });
 
