@@ -79,7 +79,7 @@ const setUploadPictureFormSubmit = (onSuccess) => {
           closeEditPictureWindow();
         },
         new FormData(evt.target),
-      )
+      );
     }
   });
 };
@@ -93,5 +93,5 @@ commentsInput.addEventListener('change', () => {
 });
 
 //Закрытие окна после отправки формы
-// setUploadPictureFormSubmit(closeEditPictureWindow);
+setUploadPictureFormSubmit(closeEditPictureWindow);
 

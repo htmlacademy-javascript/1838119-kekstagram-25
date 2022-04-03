@@ -29,26 +29,26 @@ const showErrorMessage = () => {
 
 //Закрытие окна сообщения
 
-// errorButton.addEventListener ('click', () => {
-//   errorMessageBlock.classList.add('hidden');
-// });
+errorButton.addEventListener ('click', () => {
+  errorMessageBlock.classList.add('hidden');
+});
 
-// successButton.addEventListener ('click', () => {
-//   errorMessageBlock.classList.add('hidden');
-// });
+successButton.addEventListener ('click', () => {
+  errorMessageBlock.classList.add('hidden');
+});
 
-// document.addEventListener ('keydown', (evt)=> {
-//   if (isEscapeKey(evt)) {
-//     errorMessageBlock.classList.add('hidden');
-//     successMessageBlock.classList.add('hidden');
-//   }
-// });
+document.addEventListener ('keydown', (evt)=> {
+  if (isEscapeKey(evt)) {
+    errorMessageBlock.classList.add('hidden');
+    successMessageBlock.classList.add('hidden');
+  }
+});
 
-// document.addEventListener ('click', () =>{
-//   if(!errorMessageBlock && successMessageBlock) {
-//     errorMessageBlock.classList.add('hidden');
-//     successMessageBlock.classList.add('hidden');
-//   }
-// });
+document.addEventListener ('click', () =>{
+  if(!errorMessageBlock && successMessageBlock) {
+    errorMessageBlock.classList.add('hidden');
+    successMessageBlock.classList.add('hidden');
+  }
+});
 
 export {showSuccessMessage, showErrorMessage};
