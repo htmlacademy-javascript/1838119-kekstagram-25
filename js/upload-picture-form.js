@@ -53,6 +53,7 @@ commentsInput.addEventListener('keydown', (evt) => {
   }
 });
 
+export {openEditPictureWindow,closeEditPictureWindow};
 //Не понимаю, почему не сбрасывается значение поля загрузки фото. Я вроде его сбрасываю через  innerHTML
 
 

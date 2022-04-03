@@ -1,15 +1,34 @@
+import {getData} from "./api.js";
+
 // Реализовать сценарий просмотра фотографий в полноразмерном режиме
-const pictureSmallSize = document.querySelectorAll('.picture');
+const pictures = document.querySelectorAll('.picture');
 const viewFullSizePictureWindow = document.querySelector('.big-picture');
 
-for (let i = 0; i < pictureSmallSize.length; i++) {
-  pictureSmallSize[i].addEventListener('click', ()=> {
+
+//Подстановка данных
+
+const fillPostInformation = (instaPost) => {
+  viewFullSizePictureWindow.querySelector('.big-picture__img').src = picture.querySelector('.picture__img').url;
+  viewFullSizePictureWindow.querySelector('.likes-count').textContext = picture.likes;
+  viewFullSizePictureWindow.querySelector('.comments-count').textContext = picture.comments;
+  viewFullSizePictureWindow.querySelector('.social__caption').textContext = picture.description;
+  viewFullSizePictureWindow.querySelector('.social__picture').src = picture.comments[avatar];
+  viewFullSizePictureWindow.querySelector('.social__picture').alt = picture.comments[name];
+  viewFullSizePictureWindow.querySelector('.social__text').textContext = picture.comments[message];
+};
+
+//Открытие окна
+for (picture of pictures) {
+  picture.addEventListener('click', (evt) => {
+    evt.preventDefault();
     viewFullSizePictureWindow.classList.remove('hidden');
-    // const openPictureFullSize = function () {
-    //   document.querySelector('.big-picture__big-img').src = pictureSmallSize[i].src;
-    //   document.querySelector('.likes-count').textContent = pictureSmallSize[i].textContent;
-    // };
+    getData((pictures)=> {
+      fillPostInformation(picture);
+    });
   });
-}
+};
+//не понимаю почему не открывается окно
+
+
 
 
