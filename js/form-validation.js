@@ -71,7 +71,6 @@ const setUploadPictureFormSubmit = (onSuccess) => {
           onSuccess();
           unblockSubmitButton();
           showSuccessMessage();
-          closeEditPictureWindow();
         },
         () => {
           unblockSubmitButton();

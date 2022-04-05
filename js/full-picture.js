@@ -1,31 +1,22 @@
-// import {getData} from './api.js';
+// Реализовать сценарий просмотра фотографий в полноразмерном режиме
 
-// // Реализовать сценарий просмотра фотографий в полноразмерном режиме
-// const instaPosts = document.querySelectorAll('.picture');
-// const viewFullSizePictureWindow = document.querySelector('.big-picture');
+const openBigPicture = () => {
+  const pictureSmallSize = document.querySelectorAll('.picture');
+  const viewFullSizePictureWindow = document.querySelector('.big-picture');
 
 
-//Открытие окна
-// for (instaPost of instaPosts) {
-//   instaPost.addEventListener('click', (evt) => {
-//     evt.preventDefault();
-//     viewFullSizePictureWindow.classList.remove('hidden');
+  for (let i = 0; i < pictureSmallSize.length; i++) {
+    pictureSmallSize[i].addEventListener('click', ()=> {
+      viewFullSizePictureWindow.classList.remove('hidden');
+      const openPictureFullSize = function () {
+        document.querySelector('.big-picture__big-img').src = pictureSmallSize[i].src;
+        document.querySelector('.likes-count').textContent = pictureSmallSize[i].textContent;
+      };
+    });
+  }
 
-//     // const fillPostInformation = (picture) => {
-//     //   viewFullSizePictureWindow.querySelector('.big-picture__img').src = picture.querySelector('.picture__img').url;
-//     //   viewFullSizePictureWindow.querySelector('.likes-count').textContext = picture.likes;
-//     //   viewFullSizePictureWindow.querySelector('.comments-count').textContext = picture.comments;
-//     //   viewFullSizePictureWindow.querySelector('.social__caption').textContext = picture.description;
-//     //   viewFullSizePictureWindow.querySelector('.social__picture').src = picture.comments[avatar];
-//     //   viewFullSizePictureWindow.querySelector('.social__picture').alt = picture.comments[name];
-//     //   viewFullSizePictureWindow.querySelector('.social__text').textContext = picture.comments[message];
-//     // };
+};
 
-//     getData((pictures)=> {
-//       fillPostInformation(picture);
-//     });
-//   });
-// }
-//не понимаю почему не открывается окно
+export {openBigPicture};
 
 

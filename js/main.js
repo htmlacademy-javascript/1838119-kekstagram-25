@@ -2,7 +2,7 @@ import './util.js';
 import './makepicture.js';
 import './upload-picture-form.js';
 import './form-validation.js';
-import './full-picture.js';
+import {openBigPicture} from './full-picture.js';
 import './change-picture-size.js';
 import './change-effects.js';
 import {getData} from './api.js';
@@ -13,4 +13,5 @@ const INSTA_POSTS_COUNT = 25;
 
 getData((pictures) => {
   renderInstaPosts(pictures.slice(0, INSTA_POSTS_COUNT));
+  openBigPicture();
 });

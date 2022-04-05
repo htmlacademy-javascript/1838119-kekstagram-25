@@ -17,6 +17,7 @@ const openEditPictureWindow = () => {
 const closeEditPictureWindow = () => {
   editPictureWindow.classList.add('hidden');
   modalWindow.classList.remove('modal-open');
+  uploadPictureInput.value = '';
 };
 
 uploadPictureInput.addEventListener ('change', () => {

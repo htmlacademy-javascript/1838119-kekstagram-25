@@ -12,9 +12,6 @@ const sendData = (onSuccess, onFail, body) => {
     {
       method: 'POST',
       body,
-      headers: {
-        'Content-Type': 'multipart/form-data'
-      },
     },
   ).then((responce)=>{
     if(responce.ok) {
