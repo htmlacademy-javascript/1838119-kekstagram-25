@@ -2,12 +2,14 @@ import {getRandomIntInclusive } from './util.js';
 
 const pictureBlock = document.querySelector('.pictures');
 const userPictureTemplate = document.querySelector('#picture').content;
+const commentCopy = document.querySelector('.social__comment').cloneNode(true);
 // const uploadPictureBlock = document.querySelector('.img-upload__wrapper');
 
 
 //Отрисовка при загрузке страницы
 
 const renderInstaPosts = (instaPosts) => {
+  document.querySelectorAll('.picture').forEach((el) => el.remove());
 
   const userPictureFragment = document.createDocumentFragment();
 
@@ -17,6 +19,8 @@ const renderInstaPosts = (instaPosts) => {
     userPictureElement.querySelector('.picture__img').src = url;
     userPictureElement.querySelector('.picture__likes').textContext = likes;
     userPictureElement.querySelector('.picture__comments').textContext = comments;
+
+
     userPictureFragment.appendChild(userPictureElement);
   });
   pictureBlock.appendChild(userPictureFragment);
@@ -34,10 +38,20 @@ const renderInstaPosts = (instaPosts) => {
       document.querySelector('.comments-count').textContent = instaPosts[index].comments.length;
       document.querySelector('.social__caption').textContent = instaPosts[index].description;
 
-      // const commentsArray = instaPosts[comments];
-      // document.querySelector('social__picture').src = commentsArray[index].avatar;
-      // document.querySelector('social__picture').alt = commentsArray[index].name;
-      // document.querySelector('social__text').textContent = commentsArray[index].message;
+      const commentsFragment = document.createDocumentFragment();
+
+      instaPosts[index].comments.forEach ((comment) => {
+      const newComment = commentCopy.cloneNode(true);
+
+      newComment.querySelector('.social__picture').src = comment.avatar;
+      newComment.querySelector('.social__picture').alt = comment.name;
+      newComment.querySelector('.social__text').textContent = comment.message;
+      commentsFragment.appendChild(newComment);
+
+    });
+
+    document.querySelector('.big-picture__social').appendChild(commentsFragment);
+
     });
   });
 };
@@ -64,85 +78,34 @@ uploadMoreCommentsButton.addEventListener ('click', () => {
     updateComment();
 });
 
-
-
 //Отрисовка для фильтра "случайные"
 
 const renderRandomInstaPosts = (instaPosts) => {
+   const shuffledArray = instaPosts
+      .sort(() => Math.random() - 0.5)
+      .slice(0,10);
 
-  // const compareRandomImages = (imageA, imageB) => {
-  //   imageA = getRandomIntInclusive(imageA);
-  //   imageB = getRandomIntInclusive(imageB);
-  //   return imageB - imageA;
-  // };
-
-    const userPictureFragment = document.createDocumentFragment();
-
-    instaPosts
-      .slice()
-      .sort(getRandomIntInclusive)
-      .slice(0,10)
-      .forEach( ({url, likes, comments}) => {
-        const userPictureElement = userPictureTemplate.cloneNode(true);
-        userPictureElement.querySelector('.picture__img').src = url;
-        userPictureElement.querySelector('.picture__likes').textContext = likes;
-        userPictureElement.querySelector('.picture__comments').textContext = comments;
-        userPictureFragment.appendChild(userPictureElement);
-      });
-      // pictureBlock.innerHTML = '';
-      // pictureBlock.appendChild(uploadPictureBlock);
-    pictureBlock.appendChild(userPictureFragment);
-
-
+    renderInstaPosts(shuffledArray);
 };
 
-//Перерисовка для фильтра "По умолчанию"
-
-const rerenderInstaPosts = (instaPosts) => {
-
-    const userPictureFragment = document.createDocumentFragment();
-
-    instaPosts.forEach( ({url, likes, comments}) => {
-        const userPictureElement = userPictureTemplate.cloneNode(true);
-        userPictureElement.querySelector('.picture__img').src = url;
-        userPictureElement.querySelector('.picture__likes').textContext = likes;
-        userPictureElement.querySelector('.picture__comments').textContext = comments;
-        userPictureFragment.appendChild(userPictureElement);
-      });
-      // pictureBlock.innerHTML = '';
-    pictureBlock.appendChild(userPictureFragment);
-
-};
 
 //Отрисовка для фильтра "Самые обсуждаемые"
 
-// const renderDiscussedInstaPosts = (instaPosts) => {
+const renderDiscussedInstaPosts = (instaPosts) => {
 
-//   const compareDiscussedImages = (imageA, imageB) => {
-//     const comments = instaPosts[i].comments;
-//     imageA = imageA[comments].length;
-//     imageB = imageB[comments].length;
-//     return imageB - imageA;
-//   };
+  const compareDiscussedImages = (imageA, imageB) => {
+    return imageB.comments.length - imageA.comments.length;
+  };
 
-//     const userPictureFragment = document.createDocumentFragment();
+  const shuffledArray =  instaPosts
+      .slice()
+      .sort(compareDiscussedImages)
+      .slice(0,25);
 
-//     instaPosts
-//       .slice()
-//       .sort(compareDiscussedImages)
-//       .slice(0,25)
-//       .forEach( ({url, likes, comments}) => {
-//         const userPictureElement = userPictureTemplate.cloneNode(true);
-//         userPictureElement.querySelector('.picture__img').src = url;
-//         userPictureElement.querySelector('.picture__likes').textContext = likes;
-//         userPictureElement.querySelector('.picture__comments').textContext = comments;
-//         userPictureFragment.appendChild(userPictureElement);
-//       });
-//     pictureBlock.innerHTML = '';
-//     pictureBlock.appendChild(userPictureFragment);
+   renderInstaPosts(shuffledArray)
 
-// };
+};
 
 
 
-export {renderInstaPosts, renderRandomInstaPosts, rerenderInstaPosts};
+export {renderInstaPosts, renderRandomInstaPosts, renderDiscussedInstaPosts};

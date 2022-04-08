@@ -56,4 +56,4 @@ const setDiscussedFilter = (cb) => {
   });
 };
 
-export {setRandomFilter, setDefaultFilter};
+export {setRandomFilter, setDefaultFilter, setDiscussedFilter};
