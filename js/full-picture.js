@@ -1,5 +1,7 @@
 // Реализовать сценарий просмотра фотографий в полноразмерном режиме
 
+import { isEscapeKey } from './util.js';
+
 // const openBigPicture = () => {
 //   const pictureSmallSize = document.querySelectorAll('.picture');
 //   const viewFullSizePictureWindow = document.querySelector('.big-picture');
@@ -18,5 +20,27 @@
 // };
 
 // export {openBigPicture};
+
+export {isEscapeKey} from './util.js';
+
+const closeFullPictureButton = document.querySelector('.big-picture__cancel');
+const viewFullSizePictureWindow = document.querySelector('.big-picture');
+
+const closeWindow = () => {
+  viewFullSizePictureWindow.classList.add('hidden');
+  document.querySelector('body').classList.remove('modal-open');
+};
+
+closeFullPictureButton.addEventListener('click', () =>{
+  closeWindow();
+});
+
+document.addEventListener('keydown', (evt) => {
+  if(isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeWindow();
+  };
+});
+
 
 
