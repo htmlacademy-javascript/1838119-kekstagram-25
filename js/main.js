@@ -19,7 +19,6 @@ getData((pictures) => {
   setRandomFilter(debounce(()=>renderRandomInstaPosts(pictures), RERENDER_DELAY));
   setDefaultFilter(debounce(()=>renderInstaPosts(pictures.slice(0, INSTA_POSTS_COUNT)), RERENDER_DELAY));
   setDiscussedFilter(debounce(()=>renderDiscussedInstaPosts(pictures), RERENDER_DELAY));
-  // debounce(()=>renderRandomInstaPosts(pictures), RERENDER_DELAY);
-  // debounce(()=>rerenderInstaPosts(pictures.slice(0, INSTA_POSTS_COUNT)), RERENDER_DELAY);
+
   openImageFilter();
 });

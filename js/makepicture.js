@@ -1,10 +1,6 @@
-import {getRandomIntInclusive } from './util.js';
-
 const pictureBlock = document.querySelector('.pictures');
 const userPictureTemplate = document.querySelector('#picture').content;
-const commentCopy = document.querySelector('.social__comment').cloneNode(true);
-// const uploadPictureBlock = document.querySelector('.img-upload__wrapper');
-
+const commentsCount = document.querySelector('.social__comment-count');
 
 //Отрисовка при загрузке страницы
 
@@ -38,45 +34,61 @@ const renderInstaPosts = (instaPosts) => {
       document.querySelector('.comments-count').textContent = instaPosts[index].comments.length;
       document.querySelector('.social__caption').textContent = instaPosts[index].description;
 
+      //Отрисовка комментариев
+
+      const commentsArrayCopy = instaPosts[index].comments.slice();
+      const fivecomments = commentsArrayCopy.splice(0, 5);
+
+      const commentBlocks = document.querySelectorAll('.social__comment');
       const commentsFragment = document.createDocumentFragment();
 
-      instaPosts[index].comments.forEach ((comment) => {
-      const newComment = commentCopy.cloneNode(true);
+      fivecomments.forEach(({avatar,name, message})=>{
 
-      newComment.querySelector('.social__picture').src = comment.avatar;
-      newComment.querySelector('.social__picture').alt = comment.name;
-      newComment.querySelector('.social__text').textContent = comment.message;
-      commentsFragment.appendChild(newComment);
+        const newCommentElement = document.querySelector('.social__comment').cloneNode(true);
+        newCommentElement.querySelector('.social__picture').src = avatar;
+        newCommentElement.querySelector('.social__picture').alt = name;
+        newCommentElement.querySelector('.social__text').textContent = message;
+
+        commentsFragment.appendChild(newCommentElement);
+
+      });
+
+
+      document.querySelector('.social__comments').innerHTML = '';
+      document.querySelector('.social__comments').appendChild(commentsFragment);
+
+    //Подстановка новых комментариев
+
+    const uploadMoreCommentsButton = document.querySelector('.social__comments-loader');
+    // let currentCommentsAmmount = 0;
+    let newCommentsAmount = '';
+
+    uploadMoreCommentsButton.addEventListener ('click', () => {
+
+      const newfivecomments = commentsArrayCopy.splice(newCommentsAmount + 5, 5);
+
+      newfivecomments.forEach(({avatar,name, message})=>{
+
+        const newCommentElement = document.querySelector('.social__comment').cloneNode(true);
+        newCommentElement.querySelector('.social__picture').src = avatar;
+        newCommentElement.querySelector('.social__picture').alt = name;
+        newCommentElement.querySelector('.social__text').textContent = message;
+
+        commentsFragment.appendChild(newCommentElement);
+        document.querySelector('.social__comments').appendChild(commentsFragment);
+      });
+
+      newCommentsAmount = Number("newCommentsAmount + 5");
+      // newCommentsAmount = newCommentsAmount + 5;
+      // commentsCount.textContent = newCommentsAmount + ' комментариев'
+
+      console.log(newCommentsAmount);
 
     });
-
-    document.querySelector('.big-picture__social').appendChild(commentsFragment);
-
     });
   });
 };
 
-//Подстановка комментариев
-const uploadMoreCommentsButton = document.querySelector('.social__comments-loader');
-
-const updateComment = () => {
-  const commentsList = document.querySelector('.social__comments');
-  const newComment = document.createElement('li');
-  newComment.classList.add('social__comment');
-  commentsList.appendChild(newComment);
-
-  const user = document.createElement('img');
-  user.classList.add('social__picture');
-  newComment.appendChild(user);
-
-  const commentText = document.createElement('p');
-  commentText.classList.add('social__text');
-  newComment.appendChild(commentText);
-};
-
-uploadMoreCommentsButton.addEventListener ('click', () => {
-    updateComment();
-});
 
 //Отрисовка для фильтра "случайные"
 
