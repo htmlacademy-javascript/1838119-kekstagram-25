@@ -1,6 +1,6 @@
 const pictureBlock = document.querySelector('.pictures');
 const userPictureTemplate = document.querySelector('#picture').content;
-const commentsCount = document.querySelector('.social__comment-count');
+const commentsCount = document.querySelector('.comments-uploaded-counts');
 
 //Отрисовка при загрузке страницы
 
@@ -39,7 +39,6 @@ const renderInstaPosts = (instaPosts) => {
       const commentsArrayCopy = instaPosts[index].comments.slice();
       const fivecomments = commentsArrayCopy.splice(0, 5);
 
-      const commentBlocks = document.querySelectorAll('.social__comment');
       const commentsFragment = document.createDocumentFragment();
 
       fivecomments.forEach(({avatar,name, message})=>{
@@ -57,34 +56,32 @@ const renderInstaPosts = (instaPosts) => {
       document.querySelector('.social__comments').innerHTML = '';
       document.querySelector('.social__comments').appendChild(commentsFragment);
 
-    //Подстановка новых комментариев
+      //Подстановка новых комментариев
 
-    const uploadMoreCommentsButton = document.querySelector('.social__comments-loader');
-    // let currentCommentsAmmount = 0;
-    let newCommentsAmount = '';
+      const uploadMoreCommentsButton = document.querySelector('.social__comments-loader');
+      let currentCommentsAmmount = fivecomments.length;
+      commentsCount.textContent = currentCommentsAmmount;
+      let newCommentsAmount;
 
-    uploadMoreCommentsButton.addEventListener ('click', () => {
+      uploadMoreCommentsButton.addEventListener ('click', () => {
 
-      const newfivecomments = commentsArrayCopy.splice(newCommentsAmount + 5, 5);
+        const newfivecomments = commentsArrayCopy.splice(Number(newCommentsAmount + 5), 5);
 
-      newfivecomments.forEach(({avatar,name, message})=>{
+        newfivecomments.forEach(({avatar,name, message})=>{
 
-        const newCommentElement = document.querySelector('.social__comment').cloneNode(true);
-        newCommentElement.querySelector('.social__picture').src = avatar;
-        newCommentElement.querySelector('.social__picture').alt = name;
-        newCommentElement.querySelector('.social__text').textContent = message;
+          const newCommentElement = document.querySelector('.social__comment').cloneNode(true);
+          newCommentElement.querySelector('.social__picture').src = avatar;
+          newCommentElement.querySelector('.social__picture').alt = name;
+          newCommentElement.querySelector('.social__text').textContent = message;
 
-        commentsFragment.appendChild(newCommentElement);
-        document.querySelector('.social__comments').appendChild(commentsFragment);
+          commentsFragment.appendChild(newCommentElement);
+          document.querySelector('.social__comments').appendChild(commentsFragment);
+        });
+
+        newCommentsAmount = newCommentsAmount + 5;
+        currentCommentsAmmount = currentCommentsAmmount + newfivecomments.length;
+        commentsCount.textContent = currentCommentsAmmount;
       });
-
-      newCommentsAmount = Number("newCommentsAmount + 5");
-      // newCommentsAmount = newCommentsAmount + 5;
-      // commentsCount.textContent = newCommentsAmount + ' комментариев'
-
-      console.log(newCommentsAmount);
-
-    });
     });
   });
 };
@@ -93,11 +90,11 @@ const renderInstaPosts = (instaPosts) => {
 //Отрисовка для фильтра "случайные"
 
 const renderRandomInstaPosts = (instaPosts) => {
-   const shuffledArray = instaPosts
-      .sort(() => Math.random() - 0.5)
-      .slice(0,10);
+  const shuffledArray = instaPosts
+    .sort(() => Math.random() - 0.5)
+    .slice(0,10);
 
-    renderInstaPosts(shuffledArray);
+  renderInstaPosts(shuffledArray);
 };
 
 
@@ -105,19 +102,16 @@ const renderRandomInstaPosts = (instaPosts) => {
 
 const renderDiscussedInstaPosts = (instaPosts) => {
 
-  const compareDiscussedImages = (imageA, imageB) => {
-    return imageB.comments.length - imageA.comments.length;
-  };
+  const compareDiscussedImages = (imageA, imageB) => imageB.comments.length - imageA.comments.length;
 
   const shuffledArray =  instaPosts
-      .slice()
-      .sort(compareDiscussedImages)
-      .slice(0,25);
+    .slice()
+    .sort(compareDiscussedImages)
+    .slice(0,25);
 
-   renderInstaPosts(shuffledArray)
+  renderInstaPosts(shuffledArray);
 
 };
-
 
 
 export {renderInstaPosts, renderRandomInstaPosts, renderDiscussedInstaPosts};

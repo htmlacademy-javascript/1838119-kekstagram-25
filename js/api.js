@@ -4,7 +4,6 @@ const getData = (onSuccess) => {
     .then((response)=> response.json())
     .then((pictures)=>{
       onSuccess(pictures);
-      console.log(pictures);
     });
 };
 
