@@ -23,6 +23,7 @@ const changeEffects = () => {
 //Регулировка интенсивности
 const sliderElement = document.querySelector('.effect-level__slider');
 const valueElement = document.querySelector('.effect-level__value');
+document.querySelector('.effect-level').classList.add('hidden');
 
 noUiSlider.create(sliderElement, {
   range: {
