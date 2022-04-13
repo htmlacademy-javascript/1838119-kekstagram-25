@@ -1,28 +1,34 @@
 const effects = document.querySelectorAll('.effects__radio');
 let currentEffect = '';
 const uploadedImage = document.querySelector('.img-upload__preview-img');
+const sliderElement = document.querySelector('.effect-level__slider');
+const valueElement = document.querySelector('.effect-level__value');
 
 //Смена эффекта
-
 const changeEffects = () => {
   effects.forEach((effect)=> {
     effect.addEventListener('click', ()=> {
       effects.forEach(()=> {
-        uploadedImage.classList.remove(`effects__preview--${effect.value}`);
+        uploadedImage.className = '';
+        uploadedImage.classList.add('img-upload__preview-img');
+        uploadedImage.classList.add(`effects__preview--${effect.value}`);
       });
     });
   });
-  for (const effect of effects) {
-    effect.addEventListener('click', ()=> {
-      uploadedImage.classList.add(`effects__preview--${effect.value}`);
-    });
-  }
 };
 
+//Очистка эффектов до оригинала
+const returnEffectsToOrigin = () => {
+  uploadedImage.className = '';
+  uploadedImage.style.filter = [];
+  uploadedImage.classList.add('img-upload__preview-img');
+  uploadedImage.classList.add('effects__preview--none');
+  const noneEffect = document.getElementById('effect-none');
+  noneEffect.checked = true;
+  document.querySelector('.effect-level').classList.add('hidden');
+};
 
 //Регулировка интенсивности
-const sliderElement = document.querySelector('.effect-level__slider');
-const valueElement = document.querySelector('.effect-level__value');
 document.querySelector('.effect-level').classList.add('hidden');
 
 noUiSlider.create(sliderElement, {
@@ -185,9 +191,12 @@ effects.forEach ((effect) => {
 
     if(evt.target.value === 'none') {
       document.querySelector('.effect-level').classList.add('hidden');
+      uploadedImage.style.filter = [];
     }
   });
 });
 
 
 changeEffects();
+
+export {returnEffectsToOrigin};

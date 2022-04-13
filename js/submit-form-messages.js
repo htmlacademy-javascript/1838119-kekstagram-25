@@ -1,11 +1,11 @@
 import {isEscapeKey} from './util.js';
 
-//Сообщение об успешной отправке данных
 const successMessageBlock = document.querySelector('.success-message');
 const successMessageTemplate = document.querySelector('#success').content;
 const errorMessageBlock = document.querySelector('.error-message');
+const errorMessageTemplate = document.querySelector('#error').content;
 
-
+//Сообщение об успешной отправке данных
 const showSuccessMessage = () => {
   const successMessageFragment = document.createDocumentFragment();
   const successMessageElement = successMessageTemplate.cloneNode(true);
@@ -20,10 +20,6 @@ const showSuccessMessage = () => {
 };
 
 //Сообщение об ошибке при отправке данных
-
-const errorMessageTemplate = document.querySelector('#error').content;
-
-
 const showErrorMessage = () => {
   const errorMessageFragment = document.createDocumentFragment();
   const errorMessageElement = errorMessageTemplate.cloneNode(true);
@@ -38,7 +34,6 @@ const showErrorMessage = () => {
 };
 
 //Закрытие окна сообщения
-
 document.addEventListener ('keydown', (evt)=> {
   if (isEscapeKey(evt)) {
     errorMessageBlock.classList.add('hidden');

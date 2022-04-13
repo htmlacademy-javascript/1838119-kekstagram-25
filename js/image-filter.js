@@ -17,14 +17,7 @@ const clearButtonClass = () => {
   }
 };
 
-export {
-  openImageFilter,
-  clearButtonClass
-};
-
-
 //Фильтр случайные
-
 const setRandomFilter = (cb) => {
   randomFilter.addEventListener('click', () => {
     clearButtonClass();
@@ -34,7 +27,6 @@ const setRandomFilter = (cb) => {
 };
 
 // Фильтр по умолчанию
-
 const setDefaultFilter = (cb) => {
   defaultFilter.addEventListener('click', () => {
     clearButtonClass();
@@ -44,7 +36,6 @@ const setDefaultFilter = (cb) => {
 };
 
 //Фильтр самые обсуждаемые
-
 const setDiscussedFilter = (cb) => {
   discussedFilter.addEventListener('click', () => {
     clearButtonClass();
@@ -53,4 +44,4 @@ const setDiscussedFilter = (cb) => {
   });
 };
 
-export {setRandomFilter, setDefaultFilter, setDiscussedFilter};
+export {openImageFilter, clearButtonClass,setRandomFilter, setDefaultFilter, setDiscussedFilter};

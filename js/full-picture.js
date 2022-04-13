@@ -9,8 +9,6 @@ const closeWindow = () => {
   viewFullSizePictureWindow.classList.add('hidden');
   document.querySelector('body').classList.remove('modal-open');
   document.querySelector('.comments-uploaded-counts').innerHTML = '';
-  const noneEffect = document.getElementById('effect-none');
-  noneEffect.checked = true;
 };
 
 closeFullPictureButton.addEventListener('click', () =>{

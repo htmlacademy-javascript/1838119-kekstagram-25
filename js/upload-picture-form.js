@@ -1,5 +1,7 @@
 // Для загрузки, открытия и закрытия формы редактирования изображения
 import {isEscapeKey} from './util.js';
+import {returnEffectsToOrigin} from './change-effects.js';
+import { returnSizetoDefault } from './change-picture-size.js';
 
 const modalWindow = document.querySelector('body');
 const editPictureWindow = document.querySelector('.img-upload__overlay');
@@ -19,6 +21,13 @@ const closeEditPictureWindow = () => {
   modalWindow.classList.remove('modal-open');
   uploadPictureInput.value = '';
 };
+
+uploadPictureInput.addEventListener ('click', () => {
+  returnEffectsToOrigin();
+  returnSizetoDefault();
+  commentsInput.value = '';
+  hashtagInput.value = '';
+});
 
 uploadPictureInput.addEventListener ('change', () => {
   openEditPictureWindow();
@@ -42,7 +51,6 @@ hashtagInput.addEventListener('keydown', (evt) => {
   evt.stopPropagation();
   if(isEscapeKey(evt)) {
     evt.preventDefault();
-    //closeEditWindowButton.disabled=true;
   }
 });
 
@@ -50,11 +58,9 @@ commentsInput.addEventListener('keydown', (evt) => {
   evt.stopPropagation();
   if(isEscapeKey(evt)) {
     evt.preventDefault();
-    //closeEditWindowButton.disabled=true;
   }
 });
 
 export {openEditPictureWindow,closeEditPictureWindow};
-//Не понимаю, почему не сбрасывается значение поля загрузки фото. Я вроде его сбрасываю через  innerHTML
 
 

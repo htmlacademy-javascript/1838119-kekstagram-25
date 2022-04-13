@@ -680,6 +680,9 @@ main {
           filter: brightness(3);
 }
 
+.effects__preview--none {
+  filter: none;
+}
 
 /**
  * Блок добавления хэштегов и комментария к изображению

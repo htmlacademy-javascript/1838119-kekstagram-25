@@ -8,15 +8,14 @@ const renderInstaPosts = (instaPosts) => {
   document.querySelectorAll('.picture').forEach((el) => el.remove());
 
   const userPictureFragment = document.createDocumentFragment();
+  console.log(instaPosts);
 
   instaPosts.forEach( ({url, likes, comments}) => {
 
     const userPictureElement = userPictureTemplate.cloneNode(true);
     userPictureElement.querySelector('.picture__img').src = url;
-    userPictureElement.querySelector('.picture__likes').textContext = likes;
-    userPictureElement.querySelector('.picture__comments').textContext = comments;
-
-
+    userPictureElement.querySelector('.picture__likes').textContent = likes;
+    userPictureElement.querySelector('.picture__comments').textContent = comments.length;
     userPictureFragment.appendChild(userPictureElement);
   });
   pictureBlock.appendChild(userPictureFragment);
