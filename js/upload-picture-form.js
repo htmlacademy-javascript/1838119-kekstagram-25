@@ -1,5 +1,8 @@
 // Для загрузки, открытия и закрытия формы редактирования изображения
 import {isEscapeKey} from './util.js';
+import {returnEffectsToOrigin} from './change-effects.js';
+import { returnSizetoDefault } from './change-picture-size.js';
+
 
 const modalWindow = document.querySelector('body');
 const editPictureWindow = document.querySelector('.img-upload__overlay');
@@ -8,17 +11,33 @@ const closeEditWindowButton = document.querySelector('#upload-cancel');
 const hashtagInput = document.querySelector('.text__hashtags');
 const commentsInput = document.querySelector('.text__description');
 
+const onEditPictureWindowEscKeydown = (evt) => {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeEditPictureWindow();
+    uploadPictureInput.value = '';
+  }
+};
 
 const openEditPictureWindow = () => {
   modalWindow.classList.add('modal-open');
   editPictureWindow.classList.remove('hidden');
+  document.addEventListener('keydown', onEditPictureWindowEscKeydown);
 };
 
-const closeEditPictureWindow = () => {
+function closeEditPictureWindow() {
   editPictureWindow.classList.add('hidden');
   modalWindow.classList.remove('modal-open');
   uploadPictureInput.value = '';
-};
+  document.removeEventListener('keydown', onEditPictureWindowEscKeydown);
+}
+
+uploadPictureInput.addEventListener ('click', () => {
+  returnEffectsToOrigin();
+  returnSizetoDefault();
+  commentsInput.value = '';
+  hashtagInput.value = '';
+});
 
 uploadPictureInput.addEventListener ('change', () => {
   openEditPictureWindow();
@@ -30,19 +49,10 @@ closeEditWindowButton.addEventListener ('click', (evt) => {
   uploadPictureInput.value = '';
 });
 
-document.addEventListener ('keydown', (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closeEditPictureWindow();
-    uploadPictureInput.value = '';
-  }
-});
-
 hashtagInput.addEventListener('keydown', (evt) => {
   evt.stopPropagation();
   if(isEscapeKey(evt)) {
     evt.preventDefault();
-    //closeEditWindowButton.disabled=true;
   }
 });
 
@@ -50,11 +60,7 @@ commentsInput.addEventListener('keydown', (evt) => {
   evt.stopPropagation();
   if(isEscapeKey(evt)) {
     evt.preventDefault();
-    //closeEditWindowButton.disabled=true;
   }
 });
 
 export {openEditPictureWindow,closeEditPictureWindow};
-//Не понимаю, почему не сбрасывается значение поля загрузки фото. Я вроде его сбрасываю через  innerHTML
-
-

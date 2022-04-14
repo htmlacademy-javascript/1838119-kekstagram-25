@@ -1,38 +1,48 @@
+import { onUploadFormEscKeydown } from './full-picture.js';
+
 const pictureBlock = document.querySelector('.pictures');
 const userPictureTemplate = document.querySelector('#picture').content;
 const commentsCount = document.querySelector('.comments-uploaded-counts');
 
 //Отрисовка при загрузке страницы
 
-const renderInstaPosts = (instaPosts) => {
-  document.querySelectorAll('.picture').forEach((el) => el.remove());
-
+const fillPictureData = (instaPosts) => {
   const userPictureFragment = document.createDocumentFragment();
 
   instaPosts.forEach( ({url, likes, comments}) => {
 
     const userPictureElement = userPictureTemplate.cloneNode(true);
     userPictureElement.querySelector('.picture__img').src = url;
-    userPictureElement.querySelector('.picture__likes').textContext = likes;
-    userPictureElement.querySelector('.picture__comments').textContext = comments;
+    userPictureElement.querySelector('.picture__likes').textContent = likes;
+    userPictureElement.querySelector('.picture__comments').textContent = comments.length;
 
 
     userPictureFragment.appendChild(userPictureElement);
   });
   pictureBlock.appendChild(userPictureFragment);
+};
 
+const renderBigPost = (instaPosts, index) => {
+  const viewFullSizePictureWindow = document.querySelector('.big-picture');
+  viewFullSizePictureWindow.classList.remove('hidden');
+  document.querySelector('body').classList.add('modal-open');
+
+  document.querySelector('.big-picture__big-img').src = instaPosts[index].url;
+  document.querySelector('.likes-count').textContent = instaPosts[index].likes;
+  document.querySelector('.comments-count').textContent = instaPosts[index].comments.length;
+  document.querySelector('.social__caption').textContent = instaPosts[index].description;
+};
+
+const renderInstaPosts = (instaPosts) => {
+  document.querySelectorAll('.picture').forEach((el) => el.remove());
+
+  fillPictureData(instaPosts);
   //Открытие полноразмерного поста
 
   document.querySelectorAll('.picture').forEach((el, index) => {
     el.addEventListener('click', () => {
-      const viewFullSizePictureWindow = document.querySelector('.big-picture');
-      viewFullSizePictureWindow.classList.remove('hidden');
-      document.querySelector('body').classList.add('modal-open');
-
-      document.querySelector('.big-picture__big-img').src = instaPosts[index].url;
-      document.querySelector('.likes-count').textContent = instaPosts[index].likes;
-      document.querySelector('.comments-count').textContent = instaPosts[index].comments.length;
-      document.querySelector('.social__caption').textContent = instaPosts[index].description;
+      renderBigPost(instaPosts, index);
+      document.addEventListener('keydown', onUploadFormEscKeydown);
 
       //Отрисовка комментариев
 
@@ -59,9 +69,12 @@ const renderInstaPosts = (instaPosts) => {
       //Подстановка новых комментариев
 
       const uploadMoreCommentsButton = document.querySelector('.social__comments-loader');
+
       let currentCommentsAmmount = fivecomments.length;
       commentsCount.textContent = currentCommentsAmmount;
       let newCommentsAmount;
+
+      uploadMoreCommentsButton.classList.remove('hidden');
 
       uploadMoreCommentsButton.addEventListener ('click', () => {
 
@@ -81,9 +94,13 @@ const renderInstaPosts = (instaPosts) => {
         newCommentsAmount = newCommentsAmount + 5;
         currentCommentsAmmount = currentCommentsAmmount + newfivecomments.length;
         commentsCount.textContent = currentCommentsAmmount;
+        if (currentCommentsAmmount >= instaPosts[index].comments.length) {
+          uploadMoreCommentsButton.classList.add('hidden');
+        }
       });
     });
   });
+
 };
 
 

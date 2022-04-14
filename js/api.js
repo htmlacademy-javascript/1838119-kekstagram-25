@@ -1,14 +1,25 @@
+import {showErrorMessage} from './util.js';
+
+const GET_DATA_LINK = 'https://25.javascript.pages.academy/kekstagram/data';
+const SEND_DATA_LINK = 'https://25.javascript.pages.academy/kekstagram';
+
 const getData = (onSuccess) => {
 
-  fetch('https://25.javascript.pages.academy/kekstagram/data')
-    .then((response)=> response.json())
+  fetch(GET_DATA_LINK)
+    .then((response)=> {
+      if(response.ok) {
+        return response.json();
+      } else {
+        showErrorMessage();
+      }
+    })
     .then((pictures)=>{
       onSuccess(pictures);
     });
 };
 
 const sendData = (onSuccess, onFail, body) => {
-  fetch('https://25.javascript.pages.academy/kekstagram',
+  fetch(SEND_DATA_LINK,
     {
       method: 'POST',
       body,

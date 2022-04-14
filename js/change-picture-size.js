@@ -8,7 +8,7 @@ const uploadedImage = document.querySelector(uploadImageClass);
 let currentSize = 100;
 changeInput.value = 100;
 
-function updateImageClasses() {
+const updateImageClasses = () => {
   uploadedImage.className = '';
   uploadedImage.classList.add(uploadImageClass);
   smallerButton.disabled = false;
@@ -33,11 +33,10 @@ function updateImageClasses() {
   if (currentSize >= 25) {
     uploadedImage.classList.add('img-upload__preview-img--25');
     smallerButton.disabled = true;
-
   }
-}
+};
 
-function manualStep (direction) {
+const manualStep = (direction) => {
   const stepSize = 25;
 
   if(direction === 'f' && currentSize < 100) {
@@ -48,7 +47,7 @@ function manualStep (direction) {
     currentSize -= stepSize;
   }
   changeInput.value = currentSize;
-}
+};
 
 biggerButton.addEventListener ('click', ()=> {
   manualStep('f');
@@ -59,3 +58,10 @@ smallerButton.addEventListener ('click', ()=> {
   manualStep('b');
   updateImageClasses();
 });
+
+const returnSizetoDefault = () => {
+  currentSize = 100;
+  changeInput.value = 100;
+};
+
+export {returnSizetoDefault};
