@@ -25,12 +25,12 @@ const openEditPictureWindow = () => {
   document.addEventListener('keydown', onEditPictureWindowEscKeydown);
 };
 
-const closeEditPictureWindow = () => {
+function closeEditPictureWindow() {
   editPictureWindow.classList.add('hidden');
   modalWindow.classList.remove('modal-open');
   uploadPictureInput.value = '';
   document.removeEventListener('keydown', onEditPictureWindowEscKeydown);
-};
+}
 
 uploadPictureInput.addEventListener ('click', () => {
   returnEffectsToOrigin();
@@ -64,5 +64,3 @@ commentsInput.addEventListener('keydown', (evt) => {
 });
 
 export {openEditPictureWindow,closeEditPictureWindow};
-
-

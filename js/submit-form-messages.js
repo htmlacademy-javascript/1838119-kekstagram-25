@@ -51,11 +51,11 @@ const showErrorMessage = () => {
   });
 };
 
-const closeMessageBlock = () => {
+function closeMessageBlock () {
   errorMessageBlock.classList.add('hidden');
   successMessageBlock.classList.add('hidden');
   document.removeEventListener('keydown', onMessageEscKeydown);
   document.removeEventListener('keydown', onMessageClick);
-};
+}
 
 export {showSuccessMessage, showErrorMessage};
