@@ -45,6 +45,7 @@ pristine.addValidator(hashtagInput, validateHashtag, 'От 2 до 20 симво�
 pristine.addValidator(commentsInput, validateComments, 'Длина комментария не должна быть больше 140 символов');
 
 //Блокировка кнопки на время отправки формы
+
 const blockSubmitButton = () => {
   submitButton.disabled = true;
   submitButton.textContent = 'Сохраняю...';
@@ -56,6 +57,7 @@ const unblockSubmitButton = () => {
 };
 
 //Отправка формы
+
 const setUploadPictureFormSubmit = (onSuccess) => {
 
   form.addEventListener('submit', (evt) => {
