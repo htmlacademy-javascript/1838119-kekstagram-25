@@ -1,4 +1,3 @@
-// Реализация превью загрузки изображения
 const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
 
 const fileChooser = document.querySelector('input[type=file]');

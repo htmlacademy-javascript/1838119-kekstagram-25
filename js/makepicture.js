@@ -67,7 +67,6 @@ const renderInstaPosts = (instaPosts) => {
       document.querySelector('.social__comments').appendChild(commentsFragment);
 
       //Подстановка новых комментариев
-
       const uploadMoreCommentsButton = document.querySelector('.social__comments-loader');
 
       let currentCommentsAmmount = fivecomments.length;
