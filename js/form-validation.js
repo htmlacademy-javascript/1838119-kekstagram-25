@@ -18,8 +18,14 @@ const pristine = new Pristine(form, {
 
 const validateHashtag = (value) => {
   const re = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
+
+  if (value === '') {
+    return true;
+  }
+
   const severalHashtags = value.split(' ');
-  if (severalHashtags.length <= 5 === false) {
+
+  if (severalHashtags.length > 5) {
     return false;
   }
 

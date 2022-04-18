@@ -6,7 +6,6 @@ const errorMessageBlock = document.querySelector('.error-message');
 const errorMessageTemplate = document.querySelector('#error').content;
 
 //Закрытие окна сообщения
-
 const onMessageEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     closeMessageBlock();
@@ -14,7 +13,8 @@ const onMessageEscKeydown = (evt) => {
 };
 
 const onMessageClick = (evt) => {
-  if(evt.target !== errorMessageBlock && evt.target !== successMessageBlock) {
+  if(evt.target !== document.querySelector('.success__inner') && evt.target !== document.querySelector('.error__inner')) {
+    evt.stopPropagation();
     closeMessageBlock();
   }
 };
@@ -22,7 +22,7 @@ const onMessageClick = (evt) => {
 //Сообщение об успешной отправке данных
 const showSuccessMessage = () => {
   document.addEventListener('keydown', onMessageEscKeydown);
-  document.addEventListener('keydown', onMessageClick);
+  document.addEventListener('click', onMessageClick);
   const successMessageFragment = document.createDocumentFragment();
   const successMessageElement = successMessageTemplate.cloneNode(true);
   successMessageFragment.appendChild(successMessageElement);
@@ -31,14 +31,14 @@ const showSuccessMessage = () => {
   const successButton = document.querySelector('.success__button');
 
   successButton.addEventListener ('click', () => {
-    successMessageBlock.classList.add('hidden');
+    successMessageBlock.innerHTML = '';
   });
 };
 
 //Сообщение об ошибке при отправке данных
 const showErrorMessage = () => {
   document.addEventListener('keydown', onMessageEscKeydown);
-  document.addEventListener('keydown', onMessageClick);
+  document.addEventListener('click', onMessageClick);
   const errorMessageFragment = document.createDocumentFragment();
   const errorMessageElement = errorMessageTemplate.cloneNode(true);
   errorMessageFragment.appendChild(errorMessageElement);
@@ -47,15 +47,15 @@ const showErrorMessage = () => {
   const errorButton = document.querySelector('.error__button');
 
   errorButton.addEventListener ('click', () => {
-    errorMessageBlock.classList.add('hidden');
+    errorMessageBlock.innerHTML = '';
   });
 };
 
 function closeMessageBlock () {
-  errorMessageBlock.classList.add('hidden');
-  successMessageBlock.classList.add('hidden');
+  errorMessageBlock.innerHTML = '';
+  successMessageBlock.innerHTML = '';
   document.removeEventListener('keydown', onMessageEscKeydown);
-  document.removeEventListener('keydown', onMessageClick);
+  document.removeEventListener('click', onMessageClick);
 }
 
 export {showSuccessMessage, showErrorMessage};
