@@ -39,15 +39,13 @@ noUiSlider.create(sliderElement, {
   start: 1,
   step: 0.1,
   format: {
-    to: function (value) {
+    to: (value) => {
       if (Number.isInteger(value)) {
         return value.toFixed(0);
       }
       return value.toFixed(1);
     },
-    from: function (value) {
-      return parseFloat(value);
-    },
+    from: (value) => parseFloat(value),
   },
 });
 
@@ -80,15 +78,13 @@ const sliderSettingsMap = {
     start: 1,
     step: 0.1,
     format: {
-      to: function (value) {
+      to: (value) => {
         if (Number.isInteger(value)) {
           return value.toFixed(0);
         }
         return value.toFixed(1);
       },
-      from: function (value) {
-        return parseFloat(value);
-      },
+      from: (value) => parseFloat(value),
     },
   },
   sepia: {
@@ -99,15 +95,13 @@ const sliderSettingsMap = {
     start: 1,
     step: 0.1,
     format: {
-      to: function (value) {
+      to: (value) => {
         if (Number.isInteger(value)) {
           return value.toFixed(0);
         }
         return value.toFixed(1);
       },
-      from: function (value) {
-        return parseFloat(value);
-      },
+      from: (value) => parseFloat(value),
     },
   },
   marvin: {
@@ -118,14 +112,12 @@ const sliderSettingsMap = {
     start: 100,
     step: 1,
     format: {
-      to: function (value) {
+      to: (value) => {
         if (Number.isInteger(value)) {
           return value.toFixed(0);
         }
       },
-      from: function (value) {
-        return parseFloat(value);
-      },
+      from: (value) => parseFloat(value),
     },
   },
   phobos: {
@@ -136,15 +128,13 @@ const sliderSettingsMap = {
     start: 3,
     step: 0.1,
     format: {
-      to: function (value) {
+      to: (value) => {
         if (Number.isInteger(value)) {
           return `${value.toFixed(0) }px`;
         }
         return `${value.toFixed(1) }px`;
       },
-      from: function (value) {
-        return parseFloat(value);
-      },
+      from: (value) => parseFloat(value),
     },
   },
   heat: {
@@ -155,15 +145,13 @@ const sliderSettingsMap = {
     start: 3,
     step: 0.1,
     format: {
-      to: function (value) {
+      to: (value) => {
         if (Number.isInteger(value)) {
           return value.toFixed(0);
         }
         return value.toFixed(1);
       },
-      from: function (value) {
-        return parseFloat(value);
-      },
+      from: (value) => parseFloat(value),
     },
   }
 };

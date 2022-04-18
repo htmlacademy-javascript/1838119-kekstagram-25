@@ -4,6 +4,20 @@ const pictureBlock = document.querySelector('.pictures');
 const userPictureTemplate = document.querySelector('#picture').content;
 const commentsCount = document.querySelector('.comments-uploaded-counts');
 
+//Создание комментария
+
+const makeComments = (array, commentsFragment) => {
+  array.forEach(({avatar,name, message})=>{
+
+    const newCommentElement = document.querySelector('.social__comment').cloneNode(true);
+    newCommentElement.querySelector('.social__picture').src = avatar;
+    newCommentElement.querySelector('.social__picture').alt = name;
+    newCommentElement.querySelector('.social__text').textContent = message;
+
+    commentsFragment.appendChild(newCommentElement);
+  });
+};
+
 //Отрисовка при загрузке страницы
 
 const fillPictureData = (instaPosts) => {
@@ -45,23 +59,11 @@ const renderInstaPosts = (instaPosts) => {
       document.addEventListener('keydown', onUploadFormEscKeydown);
 
       //Отрисовка комментариев
-
       const commentsArrayCopy = instaPosts[index].comments.slice();
       const fivecomments = commentsArrayCopy.splice(0, 5);
 
       const commentsFragment = document.createDocumentFragment();
-
-      fivecomments.forEach(({avatar,name, message})=>{
-
-        const newCommentElement = document.querySelector('.social__comment').cloneNode(true);
-        newCommentElement.querySelector('.social__picture').src = avatar;
-        newCommentElement.querySelector('.social__picture').alt = name;
-        newCommentElement.querySelector('.social__text').textContent = message;
-
-        commentsFragment.appendChild(newCommentElement);
-
-      });
-
+      makeComments(fivecomments, commentsFragment);
 
       document.querySelector('.social__comments').innerHTML = '';
       document.querySelector('.social__comments').appendChild(commentsFragment);
@@ -73,22 +75,18 @@ const renderInstaPosts = (instaPosts) => {
       commentsCount.textContent = currentCommentsAmmount;
       let newCommentsAmount;
 
-      uploadMoreCommentsButton.classList.remove('hidden');
+      if (currentCommentsAmmount >= instaPosts[index].comments.length) {
+        uploadMoreCommentsButton.classList.add('hidden');
+      } else {
+        uploadMoreCommentsButton.classList.remove('hidden');
+      }
+
 
       uploadMoreCommentsButton.addEventListener ('click', () => {
 
         const newfivecomments = commentsArrayCopy.splice(Number(newCommentsAmount + 5), 5);
-
-        newfivecomments.forEach(({avatar,name, message})=>{
-
-          const newCommentElement = document.querySelector('.social__comment').cloneNode(true);
-          newCommentElement.querySelector('.social__picture').src = avatar;
-          newCommentElement.querySelector('.social__picture').alt = name;
-          newCommentElement.querySelector('.social__text').textContent = message;
-
-          commentsFragment.appendChild(newCommentElement);
-          document.querySelector('.social__comments').appendChild(commentsFragment);
-        });
+        makeComments(newfivecomments, commentsFragment);
+        document.querySelector('.social__comments').appendChild(commentsFragment);
 
         newCommentsAmount = newCommentsAmount + 5;
         currentCommentsAmmount = currentCommentsAmmount + newfivecomments.length;

@@ -1,12 +1,3 @@
-// function checkStringLength (str, stringLength ) {
-//   if (str.length <= stringLength) {
-//     return true;
-//   }
-//   return false;
-// }
-
-// const getRandomArrayElement = (elements) => elements[getRandomIntInclusive(0, elements.length - 1)];
-
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 const showErrorMessage = () => {
@@ -20,12 +11,12 @@ const showErrorMessage = () => {
 };
 
 // Устранение дребезгов
-function debounce (callback, timeoutDelay = 500) {
+const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
   return (...rest) => {
     clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+    timeoutId = setTimeout(() => callback.apply(rest), timeoutDelay);
   };
-}
+};
 
 export {isEscapeKey, debounce, showErrorMessage};
